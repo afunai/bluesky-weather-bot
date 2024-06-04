@@ -6,6 +6,7 @@
   "main": "dist/clock.js",
   "scripts": {
     "build": "tsc",
+    "clock": "node dist/clock.js",
     "start": "serve -s dist"
   },
   "author": "afunai",
