@@ -5,7 +5,8 @@
   "description": "Weather bot for Bluesky",
   "main": "dist/clock.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "serve -s dist"
   },
   "author": "afunai",
   "dependencies": {
