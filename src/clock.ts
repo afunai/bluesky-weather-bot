@@ -1,10 +1,5 @@
-import * as process from 'process';
-import * as dotenv from 'dotenv';
-dotenv.config();
-
 import { BskyAgent } from '@atproto/api';
 import { CronJob } from 'cron';
-
 
 const agent = new BskyAgent({
   service: 'https://bsky.social',
@@ -22,3 +17,5 @@ const main = async () => {
 };
 
 new CronJob(process.env.CRONTAB!, main).start();
+
+console.log(`Bot started as ${process.env.BLUESKY_USERNAME}`);
