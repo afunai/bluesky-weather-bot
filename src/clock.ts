@@ -21,6 +21,4 @@ const main = async () => {
     console.log("Just posted!");
 };
 
-main();
-
 new CronJob(process.env.CRONTAB!, main).start();
