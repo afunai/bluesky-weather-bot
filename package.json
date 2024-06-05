@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "clock": "node dist/clock.js",
-    "start": "serve -s dist"
+    "web": "node dist/web.js"
   },
   "author": "afunai",
   "dependencies": {

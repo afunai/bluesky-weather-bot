@@ -1,2 +1,2 @@
 clock: npm run clock
-web: npm run start
+web: npm run web

@@ -16,7 +16,7 @@ const main = async () => {
       password: process.env.BLUESKY_PASSWORD!
     });
     await agent.post({
-        text: "🙂 test test"
+        text: "🙂"
     });
     console.log("Just posted!");
 };
