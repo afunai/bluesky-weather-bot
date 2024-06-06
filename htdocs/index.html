@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bluesky Weather Bot: Update location</title>
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <h1>Update location</h1>
+
+    <form method="post">
+      <label for="locationName">Name</label>
+      <input id="locationName" name="locationName" type="text" />
+      <br/>
+
+      <label for="latitude">Latitude</label>
+      <input id="latitude" name="latitude" type="number" />
+      <br/>
+
+      <label for="longitude">Longitude</label>
+      <input id="longitude" name="longitude" type="number" />
+      <br/>
+
+      <input type="submit" value="Update" />
+    </form>
+  </body>
+  <script>
+    getLocation();
+  </script>
+</html>
