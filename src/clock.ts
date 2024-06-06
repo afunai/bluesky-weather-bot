@@ -21,11 +21,11 @@ const main = async () => {
         text: text
       }).then(({uri, cid}) => {
         console.log(`Posted: ${uri}`);
-      });
-    });
+      }).catch(e => console.log(e));
+    }).catch(e => console.log(e));
   });
 };
 
 new CronJob(process.env.CRONTAB!, main).start();
 
-console.log(`Bot started as ${process.env.BLUESKY_USERNAME}`);
+console.log(`Bot started as ${process.env.BLUESKY_USERNAME}: "${process.env.CRONTAB}"`);
