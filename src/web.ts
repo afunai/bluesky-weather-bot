@@ -1,4 +1,6 @@
 import express from 'express';
+import basicAuth from 'express-basic-auth';
+
 import fs from 'fs';
 
 import { FetchWeatherParameters } from './openmeteo/fetch-weather-text';
@@ -7,8 +9,14 @@ import { post } from './post/poster';
 const app = express();
 const port = process.env.PORT || 5001;
 
-app.use(express.static(__dirname + '/../htdocs'));
-app.use(express.urlencoded({ extended: true }));
+app.use([
+  basicAuth({
+    users: { admin: process.env.ADMIN_PW || 'admin' },
+    challenge: true,
+  }),
+  express.urlencoded({ extended: true }),
+  express.static(__dirname + '/../htdocs'),
+]);
 
 app.post('/', (req, res) => {
   const params: FetchWeatherParameters = {
