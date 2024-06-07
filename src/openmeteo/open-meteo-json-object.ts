@@ -9,7 +9,7 @@ export type OpenMeteoJsonObject = {
   timezone: string; // 'Asia/Tokyo'
   timezone_abbreviation: string; // 'JST'
   elevation: number; // 44
-  current_units?: {
+  current_units: {
     time: 'iso8601' | 'unixtime';
     interval: 'seconds';
     temperature_2m: '°C' | '°F';
@@ -19,7 +19,7 @@ export type OpenMeteoJsonObject = {
     weather_code: 'wmo code';
     wind_speed_10m: 'km/h' | 'mph' | 'm/s' | 'knots';
   };
-  current?: {
+  current: {
     time: string; // '2024-06-06T16:30'
     interval: number; // 900
     temperature_2m: number; // 23.4
@@ -29,7 +29,7 @@ export type OpenMeteoJsonObject = {
     weather_code: number; // 2
     wind_speed_10m: number; // 2.38
   };
-  hourly_units?: {
+  hourly_units: {
     time: 'iso8601' | 'unixtime';
     weather_code: 'wmo code'
     temperature_2m: '°C' | '°F';
@@ -38,7 +38,7 @@ export type OpenMeteoJsonObject = {
     snowfall: 'cm';
     is_day: '';
   };
-  hourly?: {
+  hourly: {
     time: string[]; // [ '2024-06-05T00:00', '2024-06-05T01:00', '2024-06-05T02:00' ]
     weather_code: number[]; // [ 1, 1 ]
     temperature_2m: number[]; // [ 17, 16.8 ]
@@ -47,7 +47,7 @@ export type OpenMeteoJsonObject = {
     snowfall: number[]; // [0.00, 0.00]
     is_day: (1 | 0)[]; // [0, 0]
   };
-  daily_units?: {
+  daily_units: {
     time: 'iso8601' | 'unixtime';
     weather_code: 'wmo code';
     temperature_2m_max: '°C' | '°F';
@@ -56,7 +56,7 @@ export type OpenMeteoJsonObject = {
     snowfall_sum: 'cm';
     wind_speed_10m_max: 'km/h' | 'mph' | 'm/s' | 'knots';
   };
-  daily?: {
+  daily: {
     time: string[]; // [ '2024-06-05', '2024-06-06' ]
     weather_code: number[]; // [ 2, 3 ]
     temperature_2m_max: number[]; // [ 26.6, 25.2 ]
