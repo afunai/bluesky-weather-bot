@@ -1,28 +1,17 @@
-import { BskyAgent } from '@atproto/api';
 import { CronJob } from 'cron';
+import fs from 'fs';
 
-import { fetchWeatherText } from './openmeteo/fetch-weather-text';
-
-const agent = new BskyAgent({
-  service: 'https://bsky.social',
-});
+import { FetchWeatherParameters } from './openmeteo/fetch-weather-text';
+import { post } from './post/poster';
 
 const main = async () => {
-  agent.login({
-    identifier: process.env.BLUESKY_USERNAME!,
-    password: process.env.BLUESKY_PASSWORD!
-  }).then(_ => {
-    fetchWeatherText({
-      locationName: '東京',
-      latitude: 35.7068,
-      longitude: 139.7245,
-    }).then(text => {
-      agent.post({
-        text: text
-      }).then(({uri, cid}) => {
-        console.log(`Posted: ${uri}`);
-      }).catch(e => console.log(e));
-    }).catch(e => console.log(e));
+  fs.readFile('campsite.json', 'utf8', function (err, data) {
+    const params: FetchWeatherParameters = err ? {
+      locationName: 'Tokyo',
+      latitude: 35.6895,
+      longitude: 139.6917,
+    } : JSON.parse(data);
+    post(params, 'daily');
   });
 };
 
