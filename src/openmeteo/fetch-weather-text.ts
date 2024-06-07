@@ -1,7 +1,7 @@
 import { OpenMeteoJsonObject } from './open-meteo-json-object';
 import { code2str } from './weather-code';
 
-type FetchWeatherParameters = {
+export type FetchWeatherParameters = {
   locationName: string;
   latitude: number;
   longitude: number;
