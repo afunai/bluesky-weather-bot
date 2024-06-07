@@ -14,7 +14,7 @@ const fetchWeather = (params: FetchWeatherParameters): Promise<OpenMeteoJsonObje
     'https://api.open-meteo.com/v1/forecast' +
     `?latitude=${params.latitude}&longitude=${params.longitude}` +
     `&past_days=0&forecast_days=2` +
-    '&timezone=Asia%2FTokyo' +
+    `&timezone=${encodeURIComponent(process.env.TZ || 'UTC')}` +
     '&wind_speed_unit=ms' +
     '&current=temperature_2m,is_day,rain,snowfall,weather_code,wind_speed_10m' +
     '&hourly=temperature_2m,rain,snowfall,weather_code,wind_speed_10m,is_day' +
