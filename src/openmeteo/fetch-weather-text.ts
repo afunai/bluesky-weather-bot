@@ -1,5 +1,5 @@
 import { OpenMeteoJsonObject } from './open-meteo-json-object';
-import { code2str } from './weather-code';
+import { code2str, code2emoji } from './weather-code';
 
 export type FetchWeatherParameters = {
   locationName: string;
@@ -28,12 +28,23 @@ const fetchWeather = (params: FetchWeatherParameters): Promise<OpenMeteoJsonObje
 };
 
 const weatherTextDaily = (params: FetchWeatherParameters, obj: OpenMeteoJsonObject): string => {
-  return `${params.locationName}: ${code2str(obj.current?.weather_code)}
-あす: ${code2str(obj.daily?.weather_code[1])}`;
+  const d = obj.daily;
+  const days = d.time.map((t, i) =>
+    `${t}: ${code2emoji(d.weather_code[i])}` +
+    ` ${d.temperature_2m_max[i]}/${d.temperature_2m_min[i]}${obj.daily_units.temperature_2m_max}`
+  );
+
+  return `${params.locationName}
+${days.join('\n')}
+`
 };
 
 const weatherTextNow = (params: FetchWeatherParameters, obj: OpenMeteoJsonObject): string => {
-  return `${params.locationName}: ${code2str(obj.current?.weather_code)}`;
+  const c = obj.current;
+  return `${params.locationName}: ${code2emoji(c.weather_code)}` +
+    (c.rain ? ` ${c.rain}${obj.current_units.rain}` : '') +
+    (c.snowfall ? ` ${c.snowfall}${obj.current_units.snowfall}` : '') +
+    ` ${c.temperature_2m}${obj.current_units.temperature_2m}`;
 };
 
 export const fetchWeatherText =
