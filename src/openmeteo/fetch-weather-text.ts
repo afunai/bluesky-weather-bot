@@ -7,6 +7,8 @@ export type FetchWeatherParameters = {
   longitude: number;
 };
 
+export type FetchWeatherTextType = 'now' | 'daily';
+
 const fetchWeather = (params: FetchWeatherParameters): Promise<OpenMeteoJsonObject> => {
   return fetch(
     'https://api.open-meteo.com/v1/forecast' +
@@ -25,10 +27,23 @@ const fetchWeather = (params: FetchWeatherParameters): Promise<OpenMeteoJsonObje
   });
 };
 
-export const fetchWeatherText = (params: FetchWeatherParameters): Promise<string> => {
+const weatherTextDaily = (params: FetchWeatherParameters, obj: OpenMeteoJsonObject): string => {
+  return `${params.locationName}: ${code2str(obj.current?.weather_code)}
+あす: ${code2str(obj.daily?.weather_code[1])}`;
+};
+
+const weatherTextNow = (params: FetchWeatherParameters, obj: OpenMeteoJsonObject): string => {
+  return `${params.locationName}: ${code2str(obj.current?.weather_code)}`;
+};
+
+export const fetchWeatherText =
+  (params: FetchWeatherParameters, type: FetchWeatherTextType): Promise<string> => {
   return fetchWeather(params).then(obj => {
-    return obj ?
-      `${params.locationName}: ${code2str(obj.current?.weather_code)}
-あす: ${code2str(obj.daily?.weather_code[1])}` : 'API error';
-  });
+    switch(type) {
+      case 'daily':
+        return weatherTextDaily(params, obj);
+      case 'now':
+        return weatherTextNow(params, obj);
+    }
+  }).catch(_ => `I'm at ${params.locationName}`);
 };
