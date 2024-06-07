@@ -15,8 +15,8 @@ export const post = (params: FetchWeatherParameters, type: FetchWeatherTextType)
     _ => fetchWeatherText(params, type)
   ).then(text => {
     console.log(text);
-//    return agent.post({ text: text });
-//  }).then(({uri, cid}) => {
-//    console.log(`Posted: ${uri}`);
+    return agent.post({ text: text });
+  }).then(({uri, cid}) => {
+    console.log(`Posted: ${uri}`);
   }).catch(e => console.log(e));
 };
